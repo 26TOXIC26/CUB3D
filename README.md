@@ -1,7 +1,6 @@
 
 Here's the updated description with the mention of C language:
 
-Cub3D
 Cub3D is a project developed as part of the 42 curriculum, written in C. It introduces the basics of 3D rendering using raycasting, similar to the classic Wolfenstein 3D. The project focuses on rendering a 3D view from a 2D map using the raycasting algorithm, providing a first-person perspective in a simple 3D environment.
 
 Features:
