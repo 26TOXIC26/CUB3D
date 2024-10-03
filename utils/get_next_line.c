@@ -16,7 +16,7 @@ char	*get_all_line(int fd, char *buffer)
 {
 	char	*text;
 	char	*temp;
-	ssize_t		i;
+	ssize_t	i;
 
 	text = malloc(BUFFER_SIZE + 1 * sizeof(char));
 	if (!text)
@@ -108,7 +108,7 @@ char	*get_next_line(int fd)
 // int main()
 // {
 // 	int fd = open("kokab.txt", O_RDWR);
-	
+
 // 	get_next_line(fd);
 // 	close(fd);
 // }

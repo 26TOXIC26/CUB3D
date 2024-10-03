@@ -6,38 +6,15 @@
 /*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 12:17:43 by amousaid          #+#    #+#             */
-/*   Updated: 2024/10/02 19:32:24 by amousaid         ###   ########.fr       */
+/*   Updated: 2024/10/03 16:28:52 by amousaid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "cub3d.h"
+#include "cub3d.h"
 
-int ft_error(char *str)
-{
-	ft_putstr_fd(str, 2);
-	ft_putchar_fd('\n', 2);
-	return (1);
-}
-
-void	free_tab(char **str)
+int	ft_syntax(char *str)
 {
 	int	i;
-
-	if (!str)
-		return ;
-	i = 0;
-	while (str[i])
-	{
-		free(str[i]);
-		i++;
-	}
-	free(str);
-	str = NULL;
-}
-
-int ft_syntax(char *str)
-{
-	int i;
 
 	i = ft_strlen(str);
 	if (ft_strcmp(&str[i - 4], ".cub"))
@@ -45,59 +22,65 @@ int ft_syntax(char *str)
 	return (0);
 }
 
-int sizeof_map(int fd)
+int	sizeof_map(int fd)
 {
-	int i;
-	char *line;
+	int		i;
+	char	*line;
 
 	i = 0;
 	line = get_next_line(fd);
 	while (line)
 	{
 		i++;
+		free(line);
 		line = get_next_line(fd);
 	}
+	free(line);
 	return (i);
 }
 
-
-int ft_check_map(t_mlx *mlx)
+int	ft_check_map(t_mlx *mlx)
 {
-	int i;
+	int	i;
 
 	i = 0;
-	if (!check_texture(mlx->map, &i))
+	if (!check_texture(mlx->map, &i) || !check_colors(mlx->map, &i))
 		return (0);
 	return (1);
 }
 
-char **init_map(int fd, char *av)
+char	**init_map(t_mlx *mlx, char *av)
 {
-	char **map;
-	int i;
+	char	**map;
+	int		i;
 
-	i = sizeof_map(fd);
-	close(fd);
-	fd = open(av, O_RDONLY);
+	mlx->map_fd = open(av, O_RDONLY);
+	if (mlx->map_fd < 0)
+	{
+		ft_error("Error:  Invalid file");
+		exit(1);
+	}
+	i = sizeof_map(mlx->map_fd);
+	close(mlx->map_fd);
+	mlx->map_fd = open(av, O_RDONLY);
 	map = malloc(sizeof(char *) * (i + 1));
 	if (!map)
 		return (NULL);
 	i = 0;
-	map[i] = get_next_line(fd);
+	map[i] = get_next_line(mlx->map_fd);
 	while (map[i])
 	{
 		i++;
-		map[i] = get_next_line(fd);
+		map[i] = get_next_line(mlx->map_fd);
 	}
 	map[i] = NULL;
-	close(fd);
+	close(mlx->map_fd);
 	return (map);
 }
 
-void ft_init(t_mlx *mlx, char *av)
+void	ft_init(t_mlx *mlx, char *av)
 {
-	mlx->map_fd = open(av, O_RDONLY);
-	mlx->map = init_map(mlx->map_fd, av);
+	mlx->map = init_map(mlx, av);
 	if (!ft_check_map(mlx))
 	{
 		free_tab(mlx->map);
@@ -110,9 +93,9 @@ void ft_init(t_mlx *mlx, char *av)
 	mlx_loop(mlx->mlx);
 }
 
-int main(int ac, char **av)
+int	main(int ac, char **av)
 {
-	t_mlx mlx;
+	t_mlx	mlx;
 
 	if (ac != 2)
 		return (ft_error("Error:  Invalid number of arguments"));

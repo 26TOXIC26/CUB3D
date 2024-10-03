@@ -6,7 +6,7 @@
 #    By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/01 12:29:48 by amousaid          #+#    #+#              #
-#    Updated: 2024/10/02 17:59:29 by amousaid         ###   ########.fr        #
+#    Updated: 2024/10/03 16:23:36 by amousaid         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,14 +14,16 @@ NAME = cub3D
 BONUS = cub3D_bonus
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -fsanitize=address -g
+CFLAGS = -Wall -Wextra -Werror -fsanitize=address -g3
 RM = rm -rf
 MLX_PATH = ./minilibx
 MLX_NAME = ./minilibx/libmlx.a
 MLX_CMD = -L$(MLX_PATH) -lmlx -lXext -lX11 -lm
 
 LIBFT = ./libft/libft.a
-CUB3D_SRC = main.c ./utils/get_next_line.c ./utils/get_next_line_utils.c\
+CUB3D_SRC = main.c\
+			 ./utils/get_next_line.c ./utils/get_next_line_utils.c\
+			 ./utils/utils.c\
 			checks/check_map_file.c
 OBJ = $(CUB3D_SRC:.c=.o)
 

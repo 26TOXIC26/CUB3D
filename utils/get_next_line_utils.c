@@ -79,12 +79,12 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	else if (s1 && !s2)
 	{
 		result = malloc(ft_strlen(s1) + 1);
-		ft_strcpy (result, s1);
+		ft_strcpy(result, s1);
 	}
 	else if (!s1 && s2)
 	{
 		result = malloc(ft_strlen(s2) + 1);
-		ft_strcpy (result, s2);
+		ft_strcpy(result, s2);
 	}
 	else
 	{
