@@ -1,27 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_striteri.c                                      :+:      :+:    :+:   */
+/*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/09 18:48:34 by amousaid          #+#    #+#             */
-/*   Updated: 2023/11/10 01:14:56 by amousaid         ###   ########.fr       */
+/*   Created: 2024/03/23 03:58:57 by amousaid          #+#    #+#             */
+/*   Updated: 2024/10/05 10:25:18 by amousaid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../cub3d.h"
 
-void	ft_striteri(char *s, void (*f)(unsigned int, char *))
+int	ft_strcmp(char *s1, char *s2)
 {
-	unsigned int	i;
+	int	i;
 
-	if (!s || !f)
-		return ;
 	i = 0;
-	while (s[i])
-	{
-		f(i, s + i);
+	while (s1[i] && s2[i] && s1[i] == s2[i])
 		i++;
-	}
+	return (s1[i] - s2[i]);
 }

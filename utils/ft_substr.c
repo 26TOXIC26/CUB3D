@@ -1,37 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strnstr.c                                       :+:      :+:    :+:   */
+/*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/14 18:53:33 by amousaid          #+#    #+#             */
-/*   Updated: 2023/11/23 04:09:26 by amousaid         ###   ########.fr       */
+/*   Created: 2023/11/14 18:54:31 by amousaid          #+#    #+#             */
+/*   Updated: 2024/10/05 10:29:37 by amousaid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../cub3d.h"
 
-char	*ft_strnstr(const char *str, const char *to_finde, size_t len)
+char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
+	char	*ptr;
+	size_t	slen;
 	size_t	i;
-	size_t	check;
-	size_t	to_finde_len;
 
-	if (!str && !len)
+	if (s == NULL)
+		return (NULL);
+	slen = ft_strlen(s);
+	if (start >= slen)
+	{
+		ptr = ft_calloc(1, sizeof(char));
+		return (ptr);
+	}
+	if (start + len > slen)
+		len = slen - start;
+	ptr = malloc((len + 1) * sizeof(char));
+	if (ptr == NULL)
 		return (NULL);
 	i = 0;
-	if (!*to_finde)
-		return ((char *)str);
-	to_finde_len = ft_strlen(to_finde);
-	while (str[i] && to_finde_len <= len - i)
-	{
-		check = 0;
-		while (str[i + check] == to_finde[check] && to_finde[check])
-			check++;
-		if (to_finde_len == check)
-			return ((char *)str + i);
-		i++;
-	}
-	return (NULL);
+	while (s[start] && i < len)
+		ptr[i++] = s[start++];
+	ptr[i] = '\0';
+	return (ptr);
 }

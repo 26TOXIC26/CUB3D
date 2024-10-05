@@ -6,7 +6,7 @@
 #    By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/01 12:29:48 by amousaid          #+#    #+#              #
-#    Updated: 2024/10/03 16:23:36 by amousaid         ###   ########.fr        #
+#    Updated: 2024/10/05 10:34:19 by amousaid         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,34 +20,31 @@ MLX_PATH = ./minilibx
 MLX_NAME = ./minilibx/libmlx.a
 MLX_CMD = -L$(MLX_PATH) -lmlx -lXext -lX11 -lm
 
-LIBFT = ./libft/libft.a
 CUB3D_SRC = main.c\
-			 ./utils/get_next_line.c ./utils/get_next_line_utils.c\
-			 ./utils/utils.c\
-			checks/check_map_file.c
+			 ./utils/get_next_line.c\
+			 ./utils/utils.c ./utils/ft_atoi.c ./utils/ft_isdigit.c\
+			 ./utils/ft_strncmp.c ./utils/ft_strcmp.c ./utils/ft_strchr.c ./utils/ft_strlen.c\
+			 ./utils/ft_strjoin.c ./utils/ft_strdup.c ./utils/ft_putchar_fd.c\
+			 ./utils/ft_putstr_fd.c ./utils/ft_split.c ./utils/ft_substr.c\
+			 ./utils/ft_calloc.c checks/check_map_file.c checks/check_map_file2.c
 OBJ = $(CUB3D_SRC:.c=.o)
 
 all: $(NAME)
 bonus: $(BONUS)
 
-$(LIBFT):
-		$(MAKE) --no-print-directory -C ./libft
-
-$(NAME): $(LIBFT) $(OBJ)
-		$(CC) $(CFLAGS) $(OBJ) $(LIBFT) $(MLX_CMD) -o $(NAME)
+$(NAME): $(OBJ)
+		$(CC) $(CFLAGS) $(OBJ) $(MLX_CMD) -o $(NAME)
 		@echo "✅-------✅IS MAKE✅-------✅"
 
-$(BONUS): $(LIBFT) $(OBJ)
-		$(CC) $(CFLAGS) $(OBJ) $(LIBFT) $(MLX_CMD) -o $(BONUS)
+$(BONUS): $(OBJ)
+		$(CC) $(CFLAGS) $(OBJ) $(MLX_CMD) -o $(BONUS)
 		@echo "✅-------✅BONUS IS MAKE✅-------✅"
 
 clean:
-	$(MAKE) clean --no-print-directory -C ./libft
 	$(RM) $(OBJ)
 	@echo "🧹--------🧹IS CLEAN🧹--------🧹"
 
 fclean: clean
-	$(MAKE) fclean --no-print-directory -C ./libft
 	$(RM) $(NAME)
 	@echo "🧹-----🧹IS FULL CLEAN🧹-----🧹"
 

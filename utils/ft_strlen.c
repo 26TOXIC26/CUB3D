@@ -1,29 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memmove.c                                       :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/05 11:10:34 by amousaid          #+#    #+#             */
-/*   Updated: 2023/11/23 04:00:43 by amousaid         ###   ########.fr       */
+/*   Created: 2023/10/31 16:48:38 by amousaid          #+#    #+#             */
+/*   Updated: 2024/10/05 10:25:31 by amousaid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../cub3d.h"
 
-void	*ft_memmove(void *dest, const void *src, size_t n)
+size_t	ft_strlen(const char *s)
 {
-	if (!src && !dest)
-		return (NULL);
-	if (dest == src)
-		return (dest);
-	if (dest <= src || dest >= (src + n))
-		ft_memcpy(dest, src, n);
-	else
-	{
-		while (n--)
-			((unsigned char *)dest)[n] = ((unsigned char *)src)[n];
-	}
-	return (dest);
+	size_t	i;
+
+	i = 0;
+	while (s[i])
+		i++;
+	return (i);
 }

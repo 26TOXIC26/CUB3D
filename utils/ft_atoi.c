@@ -6,11 +6,11 @@
 /*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 13:58:18 by amousaid          #+#    #+#             */
-/*   Updated: 2023/11/22 08:58:34 by amousaid         ###   ########.fr       */
+/*   Updated: 2024/10/05 10:24:48 by amousaid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../cub3d.h"
 
 int	ft_atoi(const char *str)
 {

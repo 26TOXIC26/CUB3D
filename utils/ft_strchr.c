@@ -1,31 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strrchr.c                                       :+:      :+:    :+:   */
+/*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/13 21:53:51 by amousaid          #+#    #+#             */
-/*   Updated: 2023/11/22 08:54:05 by amousaid         ###   ########.fr       */
+/*   Created: 2023/11/05 19:08:57 by amousaid          #+#    #+#             */
+/*   Updated: 2024/10/05 10:35:15 by amousaid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../cub3d.h"
 
-char	*ft_strrchr(const char *s, int c)
+char	*ft_strchr(const char *s, int c)
 {
-	int			i;
-	const char	*result;
-
-	i = 0;
-	result = NULL;
-	while (s[i])
+	if (!s)
+		return (NULL);
+	while (*s)
 	{
-		if (s[i] == (char)c)
-			result = &s[i];
-		i++;
+		if (*s == (char)c)
+			return ((char *)s);
+		s++;
 	}
-	if ((char)c == 0)
-		return ((char *)&s[i]);
-	return ((char *)result);
+	if (*s == (char)c)
+		return ((char *)s);
+	return (NULL);
 }

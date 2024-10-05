@@ -6,11 +6,11 @@
 /*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 20:08:24 by amousaid          #+#    #+#             */
-/*   Updated: 2023/11/23 04:27:09 by amousaid         ###   ########.fr       */
+/*   Updated: 2024/10/05 10:25:08 by amousaid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../cub3d.h"
 
 static size_t	ft_countword(char *s1, char c)
 {

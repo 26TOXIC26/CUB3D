@@ -6,7 +6,7 @@
 /*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 16:15:33 by amousaid          #+#    #+#             */
-/*   Updated: 2024/10/03 17:16:58 by amousaid         ###   ########.fr       */
+/*   Updated: 2024/10/05 10:35:55 by amousaid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ int	check_rgb(char *str)
 	rgb = ft_split(rgb_str, ',');
 	if (d2_len(rgb) != 3 || check_num(rgb))
 		return (free_tab(rgb), free(rgb_str), 0);
-	return (1);
+	return (free_tab(rgb), free(rgb_str), 1);
 }
 
 int	check_colors(char **map, int *i)

@@ -1,32 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memchr.c                                        :+:      :+:    :+:   */
+/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/10 17:03:50 by amousaid          #+#    #+#             */
-/*   Updated: 2023/11/22 08:44:13 by amousaid         ###   ########.fr       */
+/*   Created: 2023/11/15 20:40:52 by amousaid          #+#    #+#             */
+/*   Updated: 2024/10/05 10:25:04 by amousaid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../cub3d.h"
 
-void	*ft_memchr(const void *s, int c, size_t n)
+void	ft_putstr_fd(char *s, int fd)
 {
-	size_t	i;
+	int	i;
 
-	i = 0;
-	while (i < n)
+	if (fd >= 0 && s)
 	{
-		if (((unsigned char *)s)[i] == (unsigned char)c)
-			return ((unsigned char *)s + i);
-		i++;
+		i = 0;
+		while (s[i])
+		{
+			write(fd, &s[i], 1);
+			i++;
+		}
 	}
-	return (NULL);
 }
 // int main()
 // {
-// 	// char str[]= "hello world";
-// 	printf("%s", (char *)memchr(NULL, 'w', 12));
+// 	int fd = open("text.txt",O_CREAT | O_WRONLY,777);
+// 	ft_putstr_fd("hello world",fd);
 // }
