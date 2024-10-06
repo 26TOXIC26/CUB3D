@@ -6,7 +6,7 @@
 /*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 12:21:55 by amousaid          #+#    #+#             */
-/*   Updated: 2024/10/05 17:13:30 by amousaid         ###   ########.fr       */
+/*   Updated: 2024/10/06 16:00:06 by amousaid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,12 @@ typedef struct s_mlx // the mlx structure
 	void	*img;
 	int		map_fd;
 }		t_mlx;
+
+typedef struct s_size_map
+{
+	size_t	height;
+	size_t	max_len;
+}	t_size_map;
 
 // function
 

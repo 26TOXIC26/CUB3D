@@ -6,35 +6,13 @@
 /*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/05 09:35:56 by amousaid          #+#    #+#             */
-/*   Updated: 2024/10/06 10:07:13 by amousaid         ###   ########.fr       */
+/*   Updated: 2024/10/06 15:41:20 by amousaid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-int	ft_can_escape(char **map, int x, int y, char **visited)
-{
-	if (x < 0 || y < 0)
-		return (1);
-	if (!map[y])
-		return (1);
-	if (!visited[y] || !map[y][x])
-		return (1);
-	if (map[y][x] == ' ' || map[y][x] == '\n')
-		return (1);
-	if (map[y][x] == '1' || visited[y][x] == '1')
-		return (0);
-	visited[y][x] = '1';
-	if (ft_can_escape(map, x + 1, y, visited))
-		return (1);
-	if (ft_can_escape(map, x - 1, y, visited))
-		return (1);
-	if (ft_can_escape(map, x, y + 1, visited))
-		return (1);
-	if (ft_can_escape(map, x, y - 1, visited))
-		return (1);
-	return (0);
-}
+
 
 static void	ft_reset_visited(char **visited)
 {
@@ -101,7 +79,33 @@ static char	**ft_alloc_visited(int height, int max_len)
 
 static int	ft_is_player_or_space(char c)
 {
-	return (c == '0' || c == 'N' || c == 'S' || c == 'E' || c == 'W');
+	if (c == '0' || c == 'N' || c == 'S' || c == 'E' || c == 'W')
+		return (1);
+	return (0);
+}
+
+int	ft_can_escape(char **map, int x, int y, char **visited)
+{
+	if (x < 0 || y < 0)
+		return (1);
+	if (!visited[y] || !map[y])
+		return (1);
+	if (!map[y][x])
+		return (1);
+	if (map[y][x] == ' ' || map[y][x] == '\n')
+		return (1);
+	if (map[y][x] == '1' || visited[y][x] == '1')
+		return (0);
+	visited[y][x] = '1';
+	if (ft_can_escape(map, x + 1, y, visited))
+		return (1);
+	if (ft_can_escape(map, x - 1, y, visited))
+		return (1);
+	if (ft_can_escape(map, x, y + 1, visited))
+		return (1);
+	if (ft_can_escape(map, x, y - 1, visited))
+		return (1);
+	return (0);
 }
 
 static int	ft_check_position(char **map, int i, int j, char **visited)

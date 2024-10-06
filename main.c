@@ -6,7 +6,7 @@
 /*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 12:17:43 by amousaid          #+#    #+#             */
-/*   Updated: 2024/10/05 17:17:39 by amousaid         ###   ########.fr       */
+/*   Updated: 2024/10/06 17:17:34 by amousaid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,21 +22,24 @@ int	ft_syntax(char *str)
 	return (0);
 }
 
-int	sizeof_map(int fd)
+t_size_map	sizeof_map(int fd)
 {
-	int		i;
+	t_size_map	size;
 	char	*line;
 
-	i = 0;
+	size.height = 0;
 	line = get_next_line(fd);
+	size.max_len = ft_strlen(line);
 	while (line)
 	{
-		i++;
+		size.height++;
 		free(line);
 		line = get_next_line(fd);
+		if (line && ft_strlen(line) > size.max_len)
+			size.max_len = ft_strlen(line);
 	}
 	free(line);
-	return (i);
+	return (size);
 }
 
 int	ft_check_map(t_mlx *mlx)
@@ -49,9 +52,34 @@ int	ft_check_map(t_mlx *mlx)
 	return (1);
 }
 
+char *ft_strdup_max(char *str, int max_len)
+{
+	char	*new;
+	int		i;
+
+	new = malloc(max_len + 1);
+	if (!new)
+		return (NULL);
+	i = 0;
+	while (str[i])
+	{
+		new[i] = str[i];
+		i++;
+	}
+	while (i < max_len)
+	{
+		new[i] = '\0';
+		i++;
+	}
+	new[i] = '\0';
+	return (new);
+}
+
 char	**init_map_x(t_mlx *mlx, char *av)
 {
 	char	**map_x;
+	t_size_map	size;
+	char 	*line;
 	int		i;
 
 	mlx->map_fd = open(av, O_RDONLY);
@@ -60,18 +88,20 @@ char	**init_map_x(t_mlx *mlx, char *av)
 		ft_error("Error:  Invalid file");
 		exit(1);
 	}
-	i = sizeof_map(mlx->map_fd);
+	size = sizeof_map(mlx->map_fd);
 	close(mlx->map_fd);
 	mlx->map_fd = open(av, O_RDONLY);
-	map_x = malloc(sizeof(char *) * (i + 1));
+	map_x = malloc(sizeof(char *) * (size.height + 1));
 	if (!map_x)
 		return (NULL);
 	i = 0;
-	map_x[i] = get_next_line(mlx->map_fd);
-	while (map_x[i])
+	line = get_next_line(mlx->map_fd);
+	while (line)
 	{
+		map_x[i] = ft_strdup_max(line, size.max_len);
+		free(line);
+		line = get_next_line(mlx->map_fd);
 		i++;
-		map_x[i] = get_next_line(mlx->map_fd);
 	}
 	map_x[i] = NULL;
 	close(mlx->map_fd);
