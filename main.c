@@ -6,7 +6,7 @@
 /*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 12:17:43 by amousaid          #+#    #+#             */
-/*   Updated: 2024/10/05 13:20:47 by amousaid         ###   ########.fr       */
+/*   Updated: 2024/10/05 17:17:39 by amousaid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,15 +77,6 @@ char	**init_map_x(t_mlx *mlx, char *av)
 	close(mlx->map_fd);
 	return (map_x);
 }
-
-// char	**init_map_y(t_mlx *mlx)
-// {
-// 	char	**map_y;
-// 	int		i;
-
-// 	i = 0;
-
-// }
 
 void	ft_init(t_mlx *mlx, char *av)
 {

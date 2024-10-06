@@ -6,7 +6,7 @@
 /*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 12:21:55 by amousaid          #+#    #+#             */
-/*   Updated: 2024/10/05 11:18:24 by amousaid         ###   ########.fr       */
+/*   Updated: 2024/10/05 17:13:30 by amousaid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ char				**ft_split(char const *s, char c);
 void				ft_putstr_fd(char *s, int fd);
 void				ft_putchar_fd(char c, int fd);
 int					ft_strcmp(char *s1, char *s2);
+void	*ft_memset(void *s, int c, size_t n);
 void	*ft_calloc(size_t count, size_t size);
 
 #endif

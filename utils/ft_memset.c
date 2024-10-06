@@ -1,41 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_calloc.c                                        :+:      :+:    :+:   */
+/*   ft_memset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/07 19:58:43 by amousaid          #+#    #+#             */
-/*   Updated: 2024/10/05 17:15:49 by amousaid         ###   ########.fr       */
+/*   Created: 2023/11/04 21:19:28 by amousaid          #+#    #+#             */
+/*   Updated: 2024/10/05 17:13:10 by amousaid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-void	ft_bzero(void *s, size_t n)
+void	*ft_memset(void *s, int c, size_t n)
 {
-	ft_memset(s, 0, n);
-}
+	char	*p;
+	size_t	i;
 
-void	*ft_calloc(size_t count, size_t size)
-{
-	void	*ptr;
-	size_t	total;
-
-	total = size * count;
-	if (total == 0)
+	if (!s && n == 0)
+		return (0);
+	p = (char *)s;
+	i = 0;
+	while (i < n)
 	{
-		ptr = malloc(1);
-		((char *)ptr)[0] = 0;
+		p[i] = (char)c;
+		i++;
 	}
-	else
-	{
-		if (size && ((total / size) != (count)))
-			return (NULL);
-		ptr = malloc(total);
-		if (ptr == NULL)
-			return (NULL);
-		ft_bzero(ptr, total);
-	}
-	return (ptr);
+	return (s);
 }

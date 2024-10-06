@@ -6,7 +6,7 @@
 #    By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/01 12:29:48 by amousaid          #+#    #+#              #
-#    Updated: 2024/10/05 10:34:19 by amousaid         ###   ########.fr        #
+#    Updated: 2024/10/05 17:13:59 by amousaid         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,8 @@ CUB3D_SRC = main.c\
 			 ./utils/ft_strncmp.c ./utils/ft_strcmp.c ./utils/ft_strchr.c ./utils/ft_strlen.c\
 			 ./utils/ft_strjoin.c ./utils/ft_strdup.c ./utils/ft_putchar_fd.c\
 			 ./utils/ft_putstr_fd.c ./utils/ft_split.c ./utils/ft_substr.c\
-			 ./utils/ft_calloc.c checks/check_map_file.c checks/check_map_file2.c
+			 ./utils/ft_calloc.c checks/check_map_file.c checks/check_map_file2.c\
+			 ./utils/ft_memset.c
 OBJ = $(CUB3D_SRC:.c=.o)
 
 all: $(NAME)
