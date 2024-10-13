@@ -6,13 +6,11 @@
 /*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/05 09:35:56 by amousaid          #+#    #+#             */
-/*   Updated: 2024/10/06 15:41:20 by amousaid         ###   ########.fr       */
+/*   Updated: 2024/10/12 15:32:54 by amousaid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
-
-
 
 static void	ft_reset_visited(char **visited)
 {
@@ -41,9 +39,7 @@ static int	ft_get_map_dims(char **map, int *height, int *max_len)
 	*max_len = 0;
 	while (map[i])
 	{
-		j = 0;
-		while (map[i][j])
-			j++;
+		j = ft_strlen(map[i]);
 		if (j > *max_len)
 			*max_len = j;
 		i++;
