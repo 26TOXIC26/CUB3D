@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ebouboul <ebouboul@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ana <ana@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 12:21:55 by amousaid          #+#    #+#             */
-/*   Updated: 2024/10/13 17:13:03 by ebouboul         ###   ########.fr       */
+/*   Updated: 2024/10/13 20:30:43 by ana              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@
 # include <unistd.h>
 
 // define
+# define M_PI 3.14159265358979323846
 # define S_W 600 // screen width
 # define S_H 600 // screen height
 # define ESC_KEY 65307
@@ -36,6 +37,8 @@
 # define A_KEY 97
 # define S_KEY 115
 # define D_KEY 100
+# define LEFT_KEY 65361
+# define RIGHT_KEY 65363
 
 // structure
 
@@ -47,6 +50,7 @@ typedef struct s_data
 	char **map2d;
 	int player_x;
 	int player_y;
+	double player_angle;
 }	t_data;
 
 typedef struct s_size_map

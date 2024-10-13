@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_map_file2.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ana <ana@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/05 09:35:56 by amousaid          #+#    #+#             */
-/*   Updated: 2024/10/12 15:32:54 by amousaid         ###   ########.fr       */
+/*   Updated: 2024/10/13 18:14:19 by ana              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -214,9 +214,6 @@ int count_player(char **map, int i)
 
 int	check_map(char **map, int *i)
 {
-	int	j;
-
-	j = 0;
 	if (!map_syntax(map, *i) || !count_player(map, *i) || !check_map_boundaries(map, *i))
 		return (ft_error("Error:  Invalid map"), 0);
 	return (1);

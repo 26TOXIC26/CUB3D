@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ebouboul <ebouboul@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ana <ana@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 12:17:43 by amousaid          #+#    #+#             */
-/*   Updated: 2024/10/13 16:50:22 by ebouboul         ###   ########.fr       */
+/*   Updated: 2024/10/13 19:52:46 by ana              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,7 @@ void	init_position(t_mlx *mlx)
 	int	j;
 
 	i = 0;
+	mlx->data->player_angle = 0.0;
 	while (mlx->data->map2d[i])
 	{
 		j = 0;
@@ -181,8 +182,8 @@ void	ft_init(t_mlx *mlx, char *av)
 	// mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->img, 0, 0);
 	fill_win(mlx, 1);
 	mlx_hook(mlx->win, 2, 1L << 0, key_hook, mlx);
-	
-	
+
+
 	mlx_loop(mlx->mlx);
 }
 
