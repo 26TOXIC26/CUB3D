@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ebouboul <ebouboul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 12:17:43 by amousaid          #+#    #+#             */
-/*   Updated: 2024/10/12 18:17:01 by amousaid         ###   ########.fr       */
+/*   Updated: 2024/10/13 16:50:22 by ebouboul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -175,10 +175,14 @@ void	ft_init(t_mlx *mlx, char *av)
 	split_c_file(mlx);
 	init_position(mlx);
 	mlx->mlx = mlx_init();
-	mlx->win = mlx_new_window(mlx->mlx, S_W, S_H, "cub3d");
-	mlx->img = mlx_new_image(mlx->mlx, S_W, S_H);
+	mlx->win = mlx_new_window(mlx->mlx, mlx->size->width * 54, mlx->size->height * 54, "Cub3D");
+	// mlx->img = mlx_new_image(mlx->mlx, S_W, S_H);
 	// mlx->img = mlx_xpm_file_to_image(mlx->mlx, mlx->data->xpms[0], (int )0);
-	mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->img, 0, 0);
+	// mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->img, 0, 0);
+	fill_win(mlx, 1);
+	mlx_hook(mlx->win, 2, 1L << 0, key_hook, mlx);
+	
+	
 	mlx_loop(mlx->mlx);
 }
 

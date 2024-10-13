@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ebouboul <ebouboul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 12:21:55 by amousaid          #+#    #+#             */
-/*   Updated: 2024/10/12 18:14:50 by amousaid         ###   ########.fr       */
+/*   Updated: 2024/10/13 17:13:03 by ebouboul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,11 @@
 // define
 # define S_W 600 // screen width
 # define S_H 600 // screen height
+# define ESC_KEY 65307
+# define W_KEY 119
+# define A_KEY 97
+# define S_KEY 115
+# define D_KEY 100
 
 // structure
 
@@ -70,6 +75,17 @@ void take_map (t_mlx *mlx, int *i);
 void take_colors(t_mlx *mlx, int *i);
 void take_xpm(t_mlx *mlx, int *i);
 void free_mlxs(t_mlx *mlx);
+
+// 2d map
+int key_hook(int keycode, t_mlx *mlx);
+void change_moves(char key, t_mlx  *mlx);
+void move_player(t_mlx *mlx);
+void fill_win(t_mlx *mlx, int color);
+void put_img(t_mlx *mlx, char *path, int x, int y);
+void fill_background(t_mlx *mlx);
+void fill_map(t_mlx *mlx);
+void change_position(t_mlx *mlx);
+
 
 // utils
 
