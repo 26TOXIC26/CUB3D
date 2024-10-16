@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_data.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ana <ana@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 14:40:17 by amousaid          #+#    #+#             */
-/*   Updated: 2024/10/12 18:14:23 by amousaid         ###   ########.fr       */
+/*   Updated: 2024/10/15 18:20:53 by ana              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,8 @@ void take_map (t_mlx *mlx, int *i)
 {
 	int j;
 	int size;
+	int width;
+	int k;
 
 	size = d2_len(&mlx->data->cub_file[*i]);
 	mlx->data->map2d = malloc(sizeof(char *) * (size + 1));
@@ -82,9 +84,17 @@ void take_map (t_mlx *mlx, int *i)
 		exit(1);
 	}
 	j = 0;
+	width = ft_strlen(mlx->data->cub_file[*i]);
+	k = *i;
+	while (mlx->data->cub_file[k] && mlx->data->cub_file[k][0] != '\n')
+	{
+		if (ft_strlen(mlx->data->cub_file[k]) > width)
+			width = ft_strlen(mlx->data->cub_file[k]);
+		k++;
+	}
 	while (mlx->data->cub_file[*i] && mlx->data->cub_file[*i][0] != '\n')
 	{
-		mlx->data->map2d[j] = ft_strdup(mlx->data->cub_file[*i]);
+		mlx->data->map2d[j] = ft_strdup_max(mlx->data->cub_file[*i], width);
 		(*i)++;
 		j++;
 	}

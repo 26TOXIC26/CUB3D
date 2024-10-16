@@ -6,7 +6,7 @@
 /*   By: ana <ana@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 16:16:44 by ebouboul          #+#    #+#             */
-/*   Updated: 2024/10/13 21:06:35 by ana              ###   ########.fr       */
+/*   Updated: 2024/10/16 15:26:28 by ana              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,6 @@ void fill_background(t_mlx *mlx)
     int i;
     int j;
 
-    i = 0;
-    while(i < mlx->size->height)
-    {
-        mlx->data->map2d[i] = ft_strdup_max(mlx->data->map2d[i], mlx->size->width);
-        i++;
-    }
     i = 0;
     while (i < mlx->size->height)
     {
@@ -202,7 +196,7 @@ void change_view(t_mlx *mlx, int keycode)
     rotate_player_image(mlx);
 }
 
-int key_hook(int keycode, t_mlx *mlx)
+void key_hook(int keycode, t_mlx *mlx)
 {
     if (keycode == ESC_KEY)
     {
@@ -240,5 +234,4 @@ int key_hook(int keycode, t_mlx *mlx)
         printf("RIGHT key pressed\n");
         change_view(mlx, keycode);
     }
-    return (0);
 }

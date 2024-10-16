@@ -6,7 +6,7 @@
 /*   By: ana <ana@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 12:21:55 by amousaid          #+#    #+#             */
-/*   Updated: 2024/10/13 20:30:43 by ana              ###   ########.fr       */
+/*   Updated: 2024/10/15 18:40:41 by ana              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ void take_xpm(t_mlx *mlx, int *i);
 void free_mlxs(t_mlx *mlx);
 
 // 2d map
-int key_hook(int keycode, t_mlx *mlx);
+void key_hook(int keycode, t_mlx *mlx);
 void change_moves(char key, t_mlx  *mlx);
 void move_player(t_mlx *mlx);
 void fill_win(t_mlx *mlx, int color);
