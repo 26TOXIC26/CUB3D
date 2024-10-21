@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_mlx.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ebouboul <ebouboul@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ana <ana@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 15:06:32 by amousaid          #+#    #+#             */
-/*   Updated: 2024/10/13 17:23:19 by ebouboul         ###   ########.fr       */
+/*   Updated: 2024/10/15 18:26:55 by ana              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,11 @@ void free_mlxs(t_mlx *mlx)
 		free_tab(mlx->data->cub_file);
 	if (mlx->data->xpms)
 		free_tab(mlx->data->xpms);
-	free(mlx->data);
-		// free(mlx);
+	if (mlx->data->map2d)
+		free_tab(mlx->data->map2d);
+	if (mlx->size)
+		free(mlx->size);
+	if (mlx->data)
+		free(mlx->data);
+	// free(mlx);
 }
