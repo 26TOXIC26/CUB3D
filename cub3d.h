@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ana <ana@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: ebouboul <ebouboul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 12:21:55 by amousaid          #+#    #+#             */
-/*   Updated: 2024/10/13 20:30:43 by ana              ###   ########.fr       */
+/*   Updated: 2024/10/21 11:16:10 by ebouboul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,14 +59,23 @@ typedef struct s_size_map
 	int	width;
 }	t_size_map;
 
+typedef struct t_img
+{
+	void	*img;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+}	t_imgs;
+
 typedef struct s_mlx // the mlx structure
 {
 	t_data	*data;
 	t_size_map	*size;
 	void	*mlx;
 	void	*win;
-	void	*img;
 	int		map_fd;
+	t_imgs	img;
 }		t_mlx;
 
 // function

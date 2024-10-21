@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map2d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ana <ana@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: ebouboul <ebouboul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 16:16:44 by ebouboul          #+#    #+#             */
-/*   Updated: 2024/10/13 21:06:35 by ana              ###   ########.fr       */
+/*   Updated: 2024/10/21 11:24:19 by ebouboul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,16 @@
 void put_img(t_mlx *mlx, char *path, int x, int y)
 {
     int		img_width;
-	int		img_height;
-	void	*img;
+    int		img_height;
+    void	*img;
 
     img = mlx_xpm_file_to_image(mlx->mlx, path, &img_width, &img_height);
+    // kill the program if the image is not loaded
+    if (!img)
+    {
+        fprintf(stderr, "Error loading image: %s\n", path);
+        return;
+    }
     mlx_put_image_to_window(mlx->mlx, mlx->win, img, img_width * x, img_height * y);
     mlx_destroy_image(mlx->mlx, img);
 }
@@ -40,10 +46,12 @@ void fill_background(t_mlx *mlx)
     int j;
 
     i = 0;
+    j = 0;
     while(i < mlx->size->height)
     {
         mlx->data->map2d[i] = ft_strdup_max(mlx->data->map2d[i], mlx->size->width);
         i++;
+        put_img(mlx,"img/square.xpm", j, i);
     }
     i = 0;
     while (i < mlx->size->height)
