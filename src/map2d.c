@@ -6,7 +6,7 @@
 /*   By: ebouboul <ebouboul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 16:16:44 by ebouboul          #+#    #+#             */
-/*   Updated: 2024/10/21 13:45:16 by ebouboul         ###   ########.fr       */
+/*   Updated: 2024/11/02 16:24:55 by ebouboul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -208,7 +208,7 @@ void change_view(t_mlx *mlx, int keycode)
     rotate_player_image(mlx);
 }
 
-void key_hook(int keycode, t_mlx *mlx)
+int key_hook(int keycode, t_mlx *mlx)
 {
     if (keycode == ESC_KEY)
     {
@@ -246,4 +246,5 @@ void key_hook(int keycode, t_mlx *mlx)
         printf("RIGHT key pressed\n");
         change_view(mlx, keycode);
     }
+    return (0);
 }
