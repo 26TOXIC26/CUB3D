@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: ebouboul <ebouboul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 12:17:43 by amousaid          #+#    #+#             */
-/*   Updated: 2024/10/18 19:27:01 by codespace        ###   ########.fr       */
+/*   Updated: 2024/11/06 00:30:51 by ebouboul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -181,6 +181,8 @@ void	ft_init(t_mlx *mlx, char *av)
 	// mlx->img = mlx_xpm_file_to_image(mlx->mlx, mlx->data->xpms[0], (int )0);
 	// mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->img, 0, 0);
 	fill_win(mlx, 1);
+	// draw_map(mlx);
+
 	mlx_hook(mlx->win, 2, 1L << 0, key_hook, mlx);
 
 

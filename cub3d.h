@@ -6,7 +6,7 @@
 /*   By: ebouboul <ebouboul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 12:21:55 by amousaid          #+#    #+#             */
-/*   Updated: 2024/10/21 13:44:56 by ebouboul         ###   ########.fr       */
+/*   Updated: 2024/11/06 00:24:39 by ebouboul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,8 @@ void put_img(t_mlx *mlx, char *path, int x, int y);
 void fill_background(t_mlx *mlx);
 void fill_map(t_mlx *mlx);
 void change_position(t_mlx *mlx);
+void draw_map(t_mlx *mlx);
+
 
 
 // utils
