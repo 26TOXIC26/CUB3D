@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_data.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ana <ana@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: ebouboul <ebouboul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 14:40:17 by amousaid          #+#    #+#             */
-/*   Updated: 2024/10/15 18:20:53 by ana              ###   ########.fr       */
+/*   Updated: 2024/11/09 05:27:14 by ebouboul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,8 @@ void take_colors(t_mlx *mlx, int *i)
 	{
 		if (!ft_strncmp("F ", mlx->data->cub_file[*i], 2))
 		{
-			rgb = ft_split(&mlx->data->cub_file[*i][3], ',');
+			rgb = 
+			(&mlx->data->cub_file[*i][3], ',');
 			mlx->data->colors[0][0] = ft_atoi(rgb[0]);
 			mlx->data->colors[0][1] = ft_atoi(rgb[1]);
 			mlx->data->colors[0][2] = ft_atoi(rgb[2]);

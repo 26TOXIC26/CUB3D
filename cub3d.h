@@ -6,7 +6,7 @@
 /*   By: ebouboul <ebouboul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 12:21:55 by amousaid          #+#    #+#             */
-/*   Updated: 2024/11/06 00:24:39 by ebouboul         ###   ########.fr       */
+/*   Updated: 2024/11/09 04:15:33 by ebouboul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,9 @@
 # define D_KEY 100
 # define LEFT_KEY 65361
 # define RIGHT_KEY 65363
+# define M_PI 3.14159265358979323846
+# define M_PI_2 1.57079632679489661923
+# define SIZE 400
 
 // structure
 
@@ -48,8 +51,8 @@ typedef struct s_data
 	char **xpms;
 	int colors[2][3];
 	char **map2d;
-	int player_x;
-	int player_y;
+	double player_x;
+	double player_y;
 	double player_angle;
 }	t_data;
 
@@ -93,12 +96,13 @@ void free_mlxs(t_mlx *mlx);
 int key_hook(int keycode, t_mlx *mlx);
 void change_moves(char key, t_mlx  *mlx);
 void move_player(t_mlx *mlx);
-void fill_win(t_mlx *mlx, int color);
+void fill_win(t_mlx *mlx);
 void put_img(t_mlx *mlx, char *path, int x, int y);
 void fill_background(t_mlx *mlx);
 void fill_map(t_mlx *mlx);
 void change_position(t_mlx *mlx);
-void draw_map(t_mlx *mlx);
+// void draw_map(t_mlx *mlx);
+void fill_map(t_mlx *mlx);
 
 
 

@@ -1,5 +1,9 @@
 {
     "files.associations": {
-        "cub3d.h": "c"
+        "cub3d.h": "c",
+        "stdio.h": "c",
+        "mlx.h": "c",
+        "string.h": "c",
+        "unistd.h": "c"
     }
 }
