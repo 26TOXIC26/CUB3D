@@ -6,7 +6,7 @@
 /*   By: ebouboul <ebouboul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 12:17:43 by amousaid          #+#    #+#             */
-/*   Updated: 2024/11/09 03:45:58 by ebouboul         ###   ########.fr       */
+/*   Updated: 2024/11/12 00:06:19 by ebouboul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -178,8 +178,11 @@ void	ft_init(t_mlx *mlx, char *av)
 	mlx->mlx = mlx_init();
 	mlx->win = mlx_new_window(mlx->mlx, mlx->size->width * 54, mlx->size->height * 54, "Cub3D");
 	mlx->data->player_angle = 60;
-	fill_map(mlx);
-	mlx_hook(mlx->win, 2, 1L << 0, key_hook, mlx);
+	// fill_map(mlx);
+	// mlx_hook(mlx->win, 2, 1L << 0, key_hook, mlx);
+	get_angle(mlx);
+	mlx_key_hook(mlx->mlx, &key_press, &mlx);
+	mlx_loop_hook(mlx->mlx, &drow_map_pixel, &mlx);
 
 
 	mlx_loop(mlx->mlx);

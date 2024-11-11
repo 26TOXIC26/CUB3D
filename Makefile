@@ -6,7 +6,7 @@
 #    By: ebouboul <ebouboul@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/01 12:29:48 by amousaid          #+#    #+#              #
-#    Updated: 2024/11/06 00:30:55 by ebouboul         ###   ########.fr        #
+#    Updated: 2024/11/12 00:07:08 by ebouboul         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,8 @@ CUB3D_SRC = main.c\
 			 ./utils/ft_calloc.c checks/check_map_file.c checks/check_map_file2.c\
 			 ./utils/ft_memset.c utils/free_mlx.c\
 			 ./src/init_data.c\
-			 ./src/map2d.c
+			 ./src/exrct.c ./src/raycasting.c ./src/render.c\
+			 ./src/render2.c
 OBJ = $(CUB3D_SRC:.c=.o)
 
 all: $(NAME)

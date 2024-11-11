@@ -6,7 +6,7 @@
 /*   By: ebouboul <ebouboul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 12:21:55 by amousaid          #+#    #+#             */
-/*   Updated: 2024/11/09 04:15:33 by ebouboul         ###   ########.fr       */
+/*   Updated: 2024/11/12 00:11:30 by ebouboul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,20 +30,47 @@
 
 // define
 # define M_PI 3.14159265358979323846
-# define S_W 600 // screen width
-# define S_H 600 // screen height
-# define ESC_KEY 65307
-# define W_KEY 119
-# define A_KEY 97
-# define S_KEY 115
-# define D_KEY 100
-# define LEFT_KEY 65361
-# define RIGHT_KEY 65363
+#define KEY_ESC     65307
+#define KEY_W       119
+#define KEY_A       97
+#define KEY_S       115
+#define KEY_D       100
+#define KEY_LEFT    65361
+#define KEY_RIGHT   65363
 # define M_PI 3.14159265358979323846
 # define M_PI_2 1.57079632679489661923
-# define SIZE 400
+# define S_W 1900
+# define S_H 1000
+# define TILE_SIZE 32
+# define FOV 60
+# define ROTATION_SPEED 0.045
+# define PLAYER_SPEED 4
 
+# define BLK 0x000000FF
+# define GREY 0x808080FF
+# define BLU 0x87CEEBFF
+# define GREN 0x008000FF
+# define ORNG 0xFF9300FF
+# define RED 0xFF0000FF
+# define WHI 0xFFFFFFFF
 // structure
+
+typedef struct mlx_texture
+{
+	uint32_t	width;
+	uint32_t	height;
+	uint8_t		bytes_per_pixel;
+	uint8_t*	pixels;
+}	mlx_texture_t;
+
+typedef struct s_tex
+{
+	mlx_texture_t	*no;
+	mlx_texture_t	*so;
+	mlx_texture_t	*we;
+	mlx_texture_t	*ea;
+}	t_tex;
+
 
 typedef struct s_data
 {
@@ -51,9 +78,16 @@ typedef struct s_data
 	char **xpms;
 	int colors[2][3];
 	char **map2d;
-	double player_x;
-	double player_y;
+	int player_x;
+	int player_y;
 	double player_angle;
+	char	**ture2d;
+	char	**sq_map;
+	char	**rgb;
+	int		w_map;
+	int		h_map;
+	char	**ff;
+	char	**cc;
 }	t_data;
 
 typedef struct s_size_map
@@ -71,10 +105,39 @@ typedef struct t_img
 	int		endian;
 }	t_imgs;
 
+typedef struct s_player
+{
+	int		plyr_x;
+	int		plyr_y;
+	double	angle;
+	float	fov_rd;
+	int		rot;
+	int		l_r;
+	int		u_d;
+	int		m_x;
+	int		m_y;
+}	t_player;
+
+typedef struct s_ray
+{
+	int		index;
+	double	ray_ngl;
+	double	horiz_x;
+	double	horiz_y;
+	double	vert_x;
+	double	vert_y;
+	double	distance;
+	int		flag;
+}	t_ray;
+
+
 typedef struct s_mlx // the mlx structure
 {
 	t_data	*data;
 	t_size_map	*size;
+	t_player	*ply;
+	t_ray	*ray;
+	t_tex	*tex;
 	void	*mlx;
 	void	*win;
 	int		map_fd;
@@ -95,7 +158,6 @@ void free_mlxs(t_mlx *mlx);
 // 2d map
 int key_hook(int keycode, t_mlx *mlx);
 void change_moves(char key, t_mlx  *mlx);
-void move_player(t_mlx *mlx);
 void fill_win(t_mlx *mlx);
 void put_img(t_mlx *mlx, char *path, int x, int y);
 void fill_background(t_mlx *mlx);
@@ -103,7 +165,16 @@ void fill_map(t_mlx *mlx);
 void change_position(t_mlx *mlx);
 // void draw_map(t_mlx *mlx);
 void fill_map(t_mlx *mlx);
-
+void	cast_rays(t_mlx *mlx);
+void	render_wall(t_mlx *mlx, int ray);
+void	get_angle(t_mlx *mlx);
+int	key_press(int keycode, t_mlx *mlx);
+int   drow_map_pixel(t_mlx *mlx);
+int	unit_circle(float angle, char c);
+float	nor_angle(float angle);
+int	get_rgba(int r, int g, int b, int a);
+void	my_mlx_pixel_put(t_mlx *mlx, int x, int y, int color);
+int	reverse_bytes(int c);
 
 
 // utils

@@ -1,10 +1,10 @@
 #include "../cub3d.h"
 #include <math.h>
 
-#define RAY_LENGTH 300000
-#define NUM_RAYS 100
-#define TILE_SIZE 40
-#define FOV_ANGLE (60 * M_PI / 180)
+// #define RAY_LENGTH 300000
+// #define NUM_RAYS 100
+// #define TILE_SIZE 40
+// #define FOV_ANGLE (60 * M_PI / 180)
 
 // Draw a line using Bresenham's algorithm
 void draw_line(t_mlx *mlx, int x0, int y0, int x1, int y1, int color)
@@ -204,8 +204,8 @@ void change_moves(char key, t_mlx *mlx)
         new_y += move_x;
     }
 
-    printf("New coordinates (%.2f, %.2f) checking map at [%d][%d]: %c\n", 
-           new_x, new_y, (int)new_y, (int)new_x, mlx->data->map2d[(int)new_y][(int)new_x]);
+    // printf("New coordinates (%.2f, %.2f) checking map at [%d][%d]: %c\n", 
+    //        new_x, new_y, (int)new_y, (int)new_x, mlx->data->map2d[(int)new_y][(int)new_x]);
 
     if (mlx->data->map2d[(int)new_y][(int)new_x] != '1')
     {
@@ -265,31 +265,31 @@ void change_moves(char key, t_mlx *mlx)
 
 
 // Handle key events
-int key_hook(int keycode, t_mlx *mlx)
-{
-    // printf("Key pressed: %d\n", keycode);
-    if (keycode == ESC_KEY)
-    {
-        free_mlxs(mlx);
-        exit(0);
-    }
-    else if (keycode == W_KEY)
-        change_moves('w', mlx);
-    else if (keycode == S_KEY)
-        change_moves('s', mlx);
-    else if (keycode == A_KEY)
-        change_moves('a', mlx);
-    else if (keycode == D_KEY)
-        change_moves('d', mlx);
-    else if (keycode == LEFT_KEY)
-    {
-        mlx->data->player_angle -= 0.1;
-        fill_map(mlx);
-    }
-    else if (keycode == RIGHT_KEY)
-    {
-        mlx->data->player_angle += 0.1;
-        fill_map(mlx);
-    }
-    return (0);
-}
+// int key_hook(int keycode, t_mlx *mlx)
+// {
+//     // printf("Key pressed: %d\n", keycode);
+//     if (keycode == ESC_KEY)
+//     {
+//         free_mlxs(mlx);
+//         exit(0);
+//     }
+//     else if (keycode == W_KEY)
+//         change_moves('w', mlx);
+//     else if (keycode == S_KEY)
+//         change_moves('s', mlx);
+//     else if (keycode == A_KEY)
+//         change_moves('a', mlx);
+//     else if (keycode == D_KEY)
+//         change_moves('d', mlx);
+//     else if (keycode == LEFT_KEY)
+//     {
+//         mlx->data->player_angle -= 0.1;
+//         fill_map(mlx);
+//     }
+//     else if (keycode == RIGHT_KEY)
+//     {
+//         mlx->data->player_angle += 0.1;
+//         fill_map(mlx);
+//     }
+//     return (0);
+// }
