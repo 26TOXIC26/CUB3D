@@ -6,7 +6,7 @@
 /*   By: ebouboul <ebouboul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 12:17:43 by amousaid          #+#    #+#             */
-/*   Updated: 2024/11/12 00:06:19 by ebouboul         ###   ########.fr       */
+/*   Updated: 2024/11/30 06:06:57 by ebouboul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ int	ft_syntax(char *str)
 	return (0);
 }
 
-t_size_map	sizeof_map(int fd)
+t_mapinfo	sizeof_map(int fd)
 {
-	t_size_map	size;
+	t_mapinfo	size;
 	char	*line;
 
 	size.height = 0;
@@ -42,12 +42,12 @@ t_size_map	sizeof_map(int fd)
 	return (size);
 }
 
-int	ft_check_map(t_mlx *mlx)
+int	ft_check_map(t_data *data)
 {
 	int	i;
 
 	i = 0;
-	if (!check_texture(mlx->data->cub_file, &i) || !check_colors(mlx->data->cub_file, &i) || !check_map(mlx->data->cub_file, &i))
+	if (!check_texture(data->cub_file, &i) || !check_colors(data->cub_file, &i) || !check_map(data->cub_file, &i))
 		return (0);
 	return (1);
 }
@@ -75,55 +75,55 @@ char *ft_strdup_max(char *str, int width)
 	return (new);
 }
 
-char	**init_map(t_mlx *mlx, char *av)
+char	**init_map(t_data *data, char *av)
 {
 	char	**map2d;
-	t_size_map	size;
+	t_mapinfo	size;
 	char 	*line;
 	int		i;
 
-	mlx->map_fd = open(av, O_RDONLY);
-	if (mlx->map_fd < 0)
-	{
-		ft_error("Error:  Invalid file");
-		exit(1);
-	}
-	size = sizeof_map(mlx->map_fd);
-	close(mlx->map_fd);
-	mlx->map_fd = open(av, O_RDONLY);
+	data->mapinfo.fd = open(av, O_RDONLY);
+	// if (mlx->map_fd < 0)
+	// {
+	// 	ft_error("Error:  Invalid file");
+	// 	exit(1);
+	// }
+	size = sizeof_map(data->mapinfo.fd);
+	close(data->mapinfo.fd);
+	data->mapinfo.fd = open(av, O_RDONLY);
 	map2d = malloc(sizeof(char *) * (size.height + 1));
 	if (!map2d)
 		return (NULL);
 	i = 0;
-	line = get_next_line(mlx->map_fd);
+	line = get_next_line(data->mapinfo.fd);
 	while (line)
 	{
 		map2d[i] = ft_strdup_max(line, size.width);
 		free(line);
-		line = get_next_line(mlx->map_fd);
+		line = get_next_line(data->mapinfo.fd);
 		i++;
 	}
 	map2d[i] = NULL;
-	close(mlx->map_fd);
+	close(data->mapinfo.fd);
 	return (map2d);
 }
 
-void	init_position(t_mlx *mlx)
+void	init_position(t_data *data)
 {
 	int	i;
 	int	j;
 
 	i = 0;
-	mlx->data->player_angle = 0.0;
-	while (mlx->data->map2d[i])
+	data->player.pos_x = 0;
+	while (data->map[i])
 	{
 		j = 0;
-		while (mlx->data->map2d[i][j])
+		while (data->map[i][j])
 		{
-			if (mlx->data->map2d[i][j] == 'N' || mlx->data->map2d[i][j] == 'S' || mlx->data->map2d[i][j] == 'E' || mlx->data->map2d[i][j] == 'W')
+			if (data->map[i][j] == 'N' || data->map[i][j] == 'S' || data->map[i][j] == 'E' || data->map[i][j] == 'W')
 			{
-				mlx->data->player_x = j;
-				mlx->data->player_y = i;
+				data->player.pos_x = j;
+				data->player.pos_y = i;
 				return ;
 			}
 			j++;
@@ -132,69 +132,50 @@ void	init_position(t_mlx *mlx)
 	}
 }
 
-void	split_c_file(t_mlx *mlx)
+void	split_c_file(t_data *data)
 {
 	int i;
 
 	i = 0;
-	take_xpm(mlx, &i);
-	take_colors(mlx, &i);
-	while (mlx->data->cub_file[i] && mlx->data->cub_file[i][0] == '\n')
+	take_xpm(data, &i);
+	take_colors(data, &i);
+	while (data->cub_file[i] && data->cub_file[i][0] == '\n')
 		i++;
-	take_map(mlx, &i);
+	take_map(data, &i);
 	i = 0;
-	mlx->size->height = d2_len(mlx->data->map2d);
-	mlx->size->width = ft_strlen(mlx->data->map2d[i]);
-	while (mlx->data->map2d[i])
+	data->mapinfo.height = d2_len(data->map);
+	data->mapinfo.width = ft_strlen(data->map[0]);
+	while (data->map[i])
 	{
-		if (ft_strlen(mlx->data->map2d[i]) > mlx->size->width)
-			mlx->size->width = ft_strlen(mlx->data->map2d[i]);
+		if (ft_strlen(data->map[i]) > data->mapinfo.width)
+			data->mapinfo.width = ft_strlen(data->map[i]);
 		i++;
 	}
 }
 
-void	ft_init(t_mlx *mlx, char *av)
+void	ft_init(t_data *data, char *av)
 {
-	mlx->data = malloc(sizeof(t_data));
-	mlx->size = malloc(sizeof(t_size_map));
-	if (!mlx->data)
+	data->cub_file = init_map(data, av);
+	if (!ft_check_map(data))
 	{
-		ft_error("Error:  Memory allocation failed");
+		free_tab(data->cub_file);
 		exit(1);
 	}
-	mlx->data->cub_file = init_map(mlx, av);
-	if (!mlx->data->cub_file)
-	{
-		ft_error("Error:  Memory allocation failed");
-		exit(1);
-	}
-	if (!ft_check_map(mlx))
-	{
-		free_tab(mlx->data->cub_file);
-		exit(1);
-	}
-	split_c_file(mlx);
-	init_position(mlx);
-	mlx->mlx = mlx_init();
-	mlx->win = mlx_new_window(mlx->mlx, mlx->size->width * 54, mlx->size->height * 54, "Cub3D");
-	mlx->data->player_angle = 60;
-	// fill_map(mlx);
-	// mlx_hook(mlx->win, 2, 1L << 0, key_hook, mlx);
-	get_angle(mlx);
-	mlx_key_hook(mlx->mlx, &key_press, &mlx);
-	mlx_loop_hook(mlx->mlx, &drow_map_pixel, &mlx);
-
-
-	mlx_loop(mlx->mlx);
+	split_c_file(data);
+	init_position(data);
 }
 
 int	main(int ac, char **av)
 {
-	t_mlx	mlx;
+	t_data	*data;
 
+	data = malloc(sizeof(t_data));
 	if (ac != 2)
 		return (ft_error("Error:  Invalid number of arguments"));
 	if (!ft_syntax(av[1]))
-		ft_init(&mlx, av[1]);
+		ft_init(data, av[1]);
+
+	// execution(&data);
+	// free_mlxs(&mlx);
 	return (0);
 }
