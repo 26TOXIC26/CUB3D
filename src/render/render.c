@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcombeau <mcombeau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ebouboul <ebouboul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/09 11:30:04 by mcombeau          #+#    #+#             */
-/*   Updated: 2023/02/12 13:45:01 by mcombeau         ###   ########.fr       */
+/*   Created: 2024/12/02 07:10:57 by ebouboul          #+#    #+#             */
+/*   Updated: 2024/12/02 07:26:17 by ebouboul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
 
-static void	set_frame_image_pixel(t_data *data, t_img *image, int x, int y)
+#include "../../cub3d.h"
+
+static void	set_frame_image_pixel(t_data *data, t_imgg *image, int x, int y)
 {
 	if (data->texture_pixels[y][x] > 0)
 		set_image_pixel(image, x, y, data->texture_pixels[y][x]);
@@ -24,7 +25,7 @@ static void	set_frame_image_pixel(t_data *data, t_img *image, int x, int y)
 
 static void	render_frame(t_data *data)
 {
-	t_img	image;
+	t_imgg	image;
 	int		x;
 	int		y;
 
@@ -41,6 +42,9 @@ static void	render_frame(t_data *data)
 		}
 		y++;
 	}
+	// printf("mlx%p\n", data->mlx);
+	// printf("win%p\n", data->win);
+	// printf("img%p\n", image.img);
 	mlx_put_image_to_window(data->mlx, data->win, image.img, 0, 0);
 	mlx_destroy_image(data->mlx, image.img);
 }
@@ -56,8 +60,8 @@ static void	render_raycast(t_data *data)
 void	render_images(t_data *data)
 {
 	render_raycast(data);
-	if (BONUS)
-		render_minimap(data);
+	// if (BONUS)
+	// 	render_minimap(data);
 }
 
 int	render(t_data *data)

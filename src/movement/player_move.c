@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   player_move.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcombeau <mcombeau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ebouboul <ebouboul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 11:31:24 by mcombeau          #+#    #+#             */
-/*   Updated: 2023/02/10 12:34:32 by mcombeau         ###   ########.fr       */
+/*   Updated: 2024/12/01 22:56:24 by ebouboul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../../cub3d.h"
 
 static int	move_player_forward(t_data *data)
 {

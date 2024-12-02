@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   player_pos.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcombeau <mcombeau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ebouboul <ebouboul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 12:57:06 by mcombeau          #+#    #+#             */
-/*   Updated: 2023/02/09 13:49:34 by mcombeau         ###   ########.fr       */
+/*   Updated: 2024/12/01 22:56:35 by ebouboul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../../cub3d.h"
 
 static bool	is_valid_pos_wall_collision(t_data *data, double x, double y)
 {

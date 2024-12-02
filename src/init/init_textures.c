@@ -6,16 +6,16 @@
 /*   By: ebouboul <ebouboul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 13:49:37 by ebouboul          #+#    #+#             */
-/*   Updated: 2024/11/15 13:49:38 by ebouboul         ###   ########.fr       */
+/*   Updated: 2024/12/02 06:32:40 by ebouboul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
-#include "cub3d.h"
+#include "../../cub3d.h"
 
 static int	*xpm_to_img(t_data *data, char *path)
 {
-	t_img	tmp;
+	t_imgg	tmp;
 	int		*buffer;
 	int		x;
 	int		y;
@@ -46,6 +46,7 @@ void	init_textures(t_data *data)
 	data->textures = ft_calloc(5, sizeof * data->textures);
 	if (!data->textures)
 		clean_exit(data, err_msg(NULL, ERR_MALLOC, 1));
+	
 	data->textures[NORTH] = xpm_to_img(data, data->texinfo.north);
 	data->textures[SOUTH] = xpm_to_img(data, data->texinfo.south);
 	data->textures[EAST] = xpm_to_img(data, data->texinfo.east);

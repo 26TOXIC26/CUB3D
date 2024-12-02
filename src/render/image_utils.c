@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   image_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcombeau <mcombeau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ebouboul <ebouboul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/09 11:34:58 by mcombeau          #+#    #+#             */
-/*   Updated: 2023/02/09 11:35:02 by mcombeau         ###   ########.fr       */
+/*   Created: 2024/12/02 07:13:14 by ebouboul          #+#    #+#             */
+/*   Updated: 2024/12/02 07:13:15 by ebouboul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
 
-void	set_image_pixel(t_img *image, int x, int y, int color)
+#include "../../cub3d.h"
+
+void	set_image_pixel(t_imgg *image, int x, int y, int color)
 {
 	int	pixel;
 

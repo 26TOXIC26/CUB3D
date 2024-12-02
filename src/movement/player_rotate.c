@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   player_rotate.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcombeau <mcombeau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ebouboul <ebouboul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 11:31:34 by mcombeau          #+#    #+#             */
-/*   Updated: 2023/02/10 12:36:24 by mcombeau         ###   ########.fr       */
+/*   Updated: 2024/12/01 22:56:45 by ebouboul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../../cub3d.h"
 
 static int	rotate_left_right(t_data *data, double rotspeed)
 {

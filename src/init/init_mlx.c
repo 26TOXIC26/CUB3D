@@ -6,14 +6,14 @@
 /*   By: ebouboul <ebouboul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 13:49:31 by ebouboul          #+#    #+#             */
-/*   Updated: 2024/11/15 13:49:32 by ebouboul         ###   ########.fr       */
+/*   Updated: 2024/12/01 23:17:08 by ebouboul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
-#include "cub3d.h"
+#include "../../cub3d.h"
 
-void	init_img(t_data *data, t_img *image, int width, int height)
+void	init_img(t_data *data, t_imgg *image, int width, int height)
 {
 	init_img_clean(image);
 	image->img = mlx_new_image(data->mlx, width, height);
@@ -24,7 +24,7 @@ void	init_img(t_data *data, t_img *image, int width, int height)
 	return ;
 }
 
-void	init_texture_img(t_data *data, t_img *image, char *path)
+void	init_texture_img(t_data *data, t_imgg *image, char *path)
 {
 	init_img_clean(image);
 	image->img = mlx_xpm_file_to_image(data->mlx, path, &data->texinfo.size,

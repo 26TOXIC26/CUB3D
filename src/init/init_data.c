@@ -6,14 +6,14 @@
 /*   By: ebouboul <ebouboul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 13:49:26 by ebouboul          #+#    #+#             */
-/*   Updated: 2024/11/15 13:49:27 by ebouboul         ###   ########.fr       */
+/*   Updated: 2024/12/02 06:14:59 by ebouboul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
-#include "cub3d.h"
+#include "../../cub3d.h"
 
-void	init_img_clean(t_img *img)
+void	init_img_clean(t_imgg *img)
 {
 	img->img = NULL;
 	img->addr = NULL;

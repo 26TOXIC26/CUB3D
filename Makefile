@@ -6,7 +6,7 @@
 #    By: ebouboul <ebouboul@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/01 12:29:48 by amousaid          #+#    #+#              #
-#    Updated: 2024/11/30 05:44:45 by ebouboul         ###   ########.fr        #
+#    Updated: 2024/12/02 07:04:11 by ebouboul         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = cub3D
 BONUS = cub3D_bonus
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -fsanitize=address -g3
+CFLAGS = -Wall -Wextra -Werror #-fsanitize=address -g3
 RM = rm -rf
 MLX_PATH = ./minilibx
 MLX_NAME = ./minilibx/libmlx.a
@@ -29,12 +29,30 @@ CUB3D_SRC = main.c\
 			 ./utils/ft_calloc.c checks/check_map_file.c checks/check_map_file2.c\
 			 ./utils/ft_memset.c utils/free_mlx.c\
 			 ./src/init_data.c\
-			#  ./src/exrct.c ./src/raycasting.c ./src/render.c\
-			#  ./src/render2.c
-OBJ = $(CUB3D_SRC:.c=.o)
+			 ./src/init/init_data.c\
+			./src/init/init_mlx.c\
+			./src/init/init_textures.c\
+			./src/movement/input_handler.c\
+			./src/movement/player_dir.c\
+			./src/movement/player_move.c\
+			./src/movement/player_pos.c\
+			./src/movement/player_rotate.c\
+			./src/render/image_utils.c\
+			./src/render/minimap_image.c\
+			./src/render/minimap_render.c\
+			./src/render/raycasting.c\
+			./src/render/render.c\
+			./src/render/texture.c\
+			
+OBJ_DIR = obj
+OBJ = $(addprefix $(OBJ_DIR)/, $(CUB3D_SRC:.c=.o))
 
 all: $(NAME)
 bonus: $(BONUS)
+
+$(OBJ_DIR)/%.o: %.c
+	@mkdir -p $(dir $@)
+	$(CC) $(CFLAGS) -c $< -o $@
 
 $(NAME): $(OBJ)
 		$(CC) $(CFLAGS) $(OBJ) $(MLX_CMD) -o $(NAME)
@@ -45,7 +63,7 @@ $(BONUS): $(OBJ)
 		@echo "✅-------✅BONUS IS MAKE✅-------✅"
 
 clean:
-	$(RM) $(OBJ)
+	$(RM) $(OBJ_DIR)
 	@echo "🧹--------🧹IS CLEAN🧹--------🧹"
 
 fclean: clean

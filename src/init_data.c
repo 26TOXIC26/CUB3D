@@ -6,7 +6,7 @@
 /*   By: ebouboul <ebouboul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 14:40:17 by amousaid          #+#    #+#             */
-/*   Updated: 2024/11/30 05:29:25 by ebouboul         ###   ########.fr       */
+/*   Updated: 2024/12/01 23:34:15 by ebouboul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,30 +14,22 @@
 
 void take_xpm(t_data *data, int *i)
 {
-	data->xpms = malloc(sizeof(char *) * 5);
-	if (!data->xpms)
-	{
-		ft_error("Error:  Memory allocation failed");
-		// free_mlxs(mlx);
-		exit(1);
-	}
 	while (data->cub_file[*i])
 	{
 		if (!ft_strncmp("NO ", data->cub_file[*i], 3))
-			data->xpms[0] = ft_substr(data->cub_file[*i], 3, ft_strlen(data->cub_file[*i]) - 4);
+			data->texinfo.north = ft_substr(data->cub_file[*i], 3, ft_strlen(data->cub_file[*i]) - 4);
 		else if (!ft_strncmp("SO ", data->cub_file[*i], 3))
-			data->xpms[1] = ft_substr(data->cub_file[*i], 3, ft_strlen(data->cub_file[*i]) - 4);
+			data->texinfo.south = ft_substr(data->cub_file[*i], 3, ft_strlen(data->cub_file[*i]) - 4);
 		else if (!ft_strncmp("WE ", data->cub_file[*i], 3))
-			data->xpms[2] = ft_substr(data->cub_file[*i], 3, ft_strlen(data->cub_file[*i]) - 4);
+			data->texinfo.west = ft_substr(data->cub_file[*i], 3, ft_strlen(data->cub_file[*i]) - 4);
 		else if (!ft_strncmp("EA ", data->cub_file[*i], 3))
 		{
-			data->xpms[3] = ft_substr(data->cub_file[*i], 3, ft_strlen(data->cub_file[*i]) - 4);
+			data->texinfo.east = ft_substr(data->cub_file[*i], 3, ft_strlen(data->cub_file[*i]) - 4);
 			(*i)++;
 			break ;
 		}
 		(*i)++;
 	}
-	data->xpms[4] = NULL;
 }
 
 void take_colors(t_data *data, int *i)

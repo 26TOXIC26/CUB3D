@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   minimap_image.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcombeau <mcombeau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ebouboul <ebouboul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 11:26:51 by mcombeau          #+#    #+#             */
-/*   Updated: 2023/02/09 11:27:40 by mcombeau         ###   ########.fr       */
+/*   Updated: 2024/12/01 22:57:18 by ebouboul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../../cub3d.h"
 
 static void	set_minimap_tile_pixels(t_minimap *minimap, int x, int y, int color)
 {

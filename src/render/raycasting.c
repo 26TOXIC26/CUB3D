@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alexa <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: ebouboul <ebouboul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 22:40:40 by alexa             #+#    #+#             */
-/*   Updated: 2023/02/09 22:40:41 by alexa            ###   ########.fr       */
+/*   Updated: 2024/12/02 07:30:09 by ebouboul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../../cub3d.h"
 
 /*
 We initialize the set up for the rays

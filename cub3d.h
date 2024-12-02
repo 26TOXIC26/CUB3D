@@ -6,7 +6,7 @@
 /*   By: ebouboul <ebouboul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 12:21:55 by amousaid          #+#    #+#             */
-/*   Updated: 2024/11/30 05:49:31 by ebouboul         ###   ########.fr       */
+/*   Updated: 2024/12/02 07:03:16 by ebouboul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include "minilibx/mlx.h"
 # include "minilibx/mlx_int.h"
 # include "utils/get_next_line.h"
+# include "colors.h"
 # include <X11/X.h>
 # include <X11/keysym.h>
 # include <errno.h>
@@ -46,13 +47,13 @@
 # define ROTATION_SPEED 0.045
 # define PLAYER_SPEED 4
 
-# define BLK 0x000000FF
-# define GREY 0x808080FF
-# define BLU 0x87CEEBFF
-# define GREN 0x008000FF
-# define ORNG 0xFF9300FF
-# define RED 0xFF0000FF
-# define WHI 0xFFFFFFFF
+// # define BLK 0x000000FF
+// # define GREY 0x808080FF
+// # define BLU 0x87CEEBFF
+// # define GREN 0x008000FF
+// # define ORNG 0xFF9300FF
+// # define RED 0xFF0000FF
+// # define WHI 0xFFFFFFFF
 
 
 #define NORTH 0
@@ -143,14 +144,14 @@ typedef unsigned long	t_ulong;
 
 
 
-// typedef struct s_img
-// {
-// 	void	*img;
-// 	int		*addr;
-// 	int		pixel_bits;
-// 	int		size_line;
-// 	int		endian;
-// }	t_img;
+typedef struct s_imgg
+{
+	void	*img;
+	int		*addr;
+	int		pixel_bits;
+	int		size_line;
+	int		endian;
+}	t_imgg;
 
 typedef struct s_texinfo
 {
@@ -173,7 +174,7 @@ typedef struct s_texinfo
 typedef struct s_minimap
 {
 	char	**map;
-	t_img	*img;
+	t_imgg	*img;
 	int		size;
 	int		offset_x;
 	int		offset_y;
@@ -244,7 +245,7 @@ typedef struct s_data
 	int			**texture_pixels;
 	int			**textures;
 	t_texinfo	texinfo;
-	t_img		minimap;
+	t_imgg		minimap;
 }	t_data;
 
 
@@ -255,6 +256,85 @@ int		ft_error(char *str);
 void take_map (t_data *data, int *i);
 void take_colors(t_data *data, int *i);
 void take_xpm(t_data *data, int *i);
+
+
+
+/* parsing/fill_color_textures.c */
+int		fill_color_textures(t_data *data, t_texinfo *textures,
+			char *line, int j);
+
+/* parsing/create_game_map.c */
+int		create_map(t_data *data, char **map, int i);
+
+/* parsing/check_textures.c */
+int		check_textures_validity(t_data *data, t_texinfo *textures);
+
+/* parsing/check_map.c */
+int		check_map_validity(t_data *data, char **map_tab);
+
+/* parsing/check_map_borders.c */
+int		check_map_sides(t_mapinfo *map, char **map_tab);
+
+/* parsing/parsing_utils.c */
+int		is_a_white_space(char c);
+size_t	find_biggest_len(t_mapinfo *map, int i);
+
+/* render/render.c */
+int		render(t_data *data);
+void	render_images(t_data *data);
+
+/* render/raycasting.c */
+int		raycasting(t_player *player, t_data *data);
+
+/* render/texture.c */
+void	init_texture_pixels(t_data *data);
+void	update_texture_pixels(t_data *data, t_texinfo *tex, t_ray *ray, int x);
+
+/* render/image_utils.c */
+void	set_image_pixel(t_imgg *image, int x, int y, int color);
+
+/* render/minimap_render.c */
+void	render_minimap(t_data *data);
+
+/* render/minimap_image.c */
+void	render_minimap_image(t_data *data, t_minimap *minimap);
+
+/* movement/input_handler.c */
+void	listen_for_input(t_data *data);
+
+/* movement/player_dir.c */
+void	init_player_direction(t_data *data);
+
+/* movement/player_pos.c */
+int		validate_move(t_data *data, double new_x, double new_y);
+
+/* movement/player_move.c */
+int		move_player(t_data *data);
+
+/* movement/player_rotate.c */
+int		rotate_player(t_data *data, double rotdir);
+
+void	init_data(t_data *data);
+void	init_img_clean(t_imgg *img);
+void	init_ray(t_ray *ray);
+
+/* init/init_mlx.c */
+void	init_mlx(t_data *data);
+void	init_img(t_data *data, t_imgg *image, int width, int height);
+void	init_texture_img(t_data *data, t_imgg *image, char *path);
+
+/* init/init_textures.c */
+void	init_textures(t_data *data);
+void	init_texinfo(t_texinfo *textures);
+
+/* parsing/check_args.c */
+int		check_file(char *arg, bool cub);
+
+/* parsing/parse_data.c */
+void	parse_data(char *path, t_data *data);
+
+/* parsing/get_file_data.c */
+int		get_file_data(t_data *data, char **map);
 
 // utils
 
@@ -275,6 +355,10 @@ int					ft_strcmp(char *s1, char *s2);
 void	*ft_memset(void *s, int c, size_t n);
 void	*ft_calloc(size_t count, size_t size);
 char *ft_strdup_max(char *str, int max_len);
+int	quit_cub3d(t_data *data);
+void	clean_exit(t_data *data, int code);
+int	err_msg(char *detail, char *str, int code);
+int	err_msg_val(int detail, char *str, int code);
 
 #endif
 

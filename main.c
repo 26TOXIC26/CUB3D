@@ -6,7 +6,7 @@
 /*   By: ebouboul <ebouboul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/01 12:17:43 by amousaid          #+#    #+#             */
-/*   Updated: 2024/11/30 06:06:57 by ebouboul         ###   ########.fr       */
+/*   Updated: 2024/12/02 07:39:46 by ebouboul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,11 +83,6 @@ char	**init_map(t_data *data, char *av)
 	int		i;
 
 	data->mapinfo.fd = open(av, O_RDONLY);
-	// if (mlx->map_fd < 0)
-	// {
-	// 	ft_error("Error:  Invalid file");
-	// 	exit(1);
-	// }
 	size = sizeof_map(data->mapinfo.fd);
 	close(data->mapinfo.fd);
 	data->mapinfo.fd = open(av, O_RDONLY);
@@ -167,13 +162,21 @@ void	ft_init(t_data *data, char *av)
 
 int	main(int ac, char **av)
 {
-	t_data	*data;
+	t_data	data;
 
-	data = malloc(sizeof(t_data));
 	if (ac != 2)
 		return (ft_error("Error:  Invalid number of arguments"));
+	init_data(&data);
 	if (!ft_syntax(av[1]))
-		ft_init(data, av[1]);
+		ft_init(&data, av[1]);
+
+	init_mlx(&data);
+	init_textures(&data);
+	// print_controls();
+	render_images(&data);
+	listen_for_input(&data);
+	// mlx_loop_hook(data.mlx, render, &data);
+	mlx_loop(data.mlx);
 
 	// execution(&data);
 	// free_mlxs(&mlx);

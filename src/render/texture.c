@@ -3,23 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   texture.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcombeau <mcombeau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ebouboul <ebouboul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/09 11:30:33 by mcombeau          #+#    #+#             */
-/*   Updated: 2023/02/11 11:38:30 by mcombeau         ###   ########.fr       */
+/*   Created: 2024/12/02 06:11:16 by ebouboul          #+#    #+#             */
+/*   Updated: 2024/12/02 07:42:17 by ebouboul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+
+#include "../../cub3d.h"
 
 void	init_texture_pixels(t_data *data)
 {
 	int	i;
 
-	if (data->texture_pixels)
-		free_tab((void **)data->texture_pixels);
+	// if (data->texture_pixels)
+	// 	free_tab((char **)data->texture_pixels);
 	data->texture_pixels = ft_calloc(data->win_height + 1,
-			sizeof * data->texture_pixels);
+			sizeof *	data->texture_pixels);
 	if (!data->texture_pixels)
 		clean_exit(data, err_msg(NULL, ERR_MALLOC, 1));
 	i = 0;
