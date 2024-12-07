@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player_pos.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ebouboul <ebouboul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 13:41:59 by amousaid          #+#    #+#             */
-/*   Updated: 2024/12/07 13:42:01 by amousaid         ###   ########.fr       */
+/*   Updated: 2024/12/07 17:34:00 by ebouboul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,19 +19,19 @@ static bool	is_valid_pos_wall_collision(t_data *data, double x, double y)
 	return (false);
 }
 
-static bool	is_valid_pos_in_map(t_data *data, double x, double y)
-{
-	if (x < 0.25 || x >= data->mapinfo.width - 1.25)
-		return (false);
-	if (y < 0.25 || y >= data->mapinfo.height - 0.25)
-		return (false);
-	return (true);
-}
+// static bool	is_valid_pos_in_map(t_data *data, double x, double y)
+// {
+// 	if (x < 0.25 || x >= data->mapinfo.width - 1.25)
+// 		return (false);
+// 	if (y < 0.25 || y >= data->mapinfo.height - 0.25)
+// 		return (false);
+// 	return (true);
+// }
 
 static bool	is_valid_pos(t_data *data, double x, double y)
 {
-	if (!BONUS && is_valid_pos_in_map(data, x, y))
-		return (true);
+	// if (!BONUS && is_valid_pos_in_map(data, x, y))
+	// 	return (true);
 	if (BONUS && is_valid_pos_wall_collision(data, x, y))
 		return (true);
 	return (false);
