@@ -1,75 +1,122 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: ebouboul <ebouboul@student.42.fr>          +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/10/01 12:29:48 by amousaid          #+#    #+#              #
-#    Updated: 2024/12/02 07:04:11 by ebouboul         ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
+.PHONY: all re clean fclean bonus
 
-NAME = cub3D
-BONUS = cub3D_bonus
+# Program file name
+NAME	= cub3D
 
-CC = cc
-CFLAGS = -Wall -Wextra -Werror #-fsanitize=address -g3
-RM = rm -rf
-MLX_PATH = ./minilibx
-MLX_NAME = ./minilibx/libmlx.a
-MLX_CMD = -L$(MLX_PATH) -lmlx -lXext -lX11 -lm
+# Colors
+GREEN = \033[1;32m
+RED = \033[1;31m
+NC = \033[0m
 
-CUB3D_SRC = main.c\
-			 ./utils/get_next_line.c\
-			 ./utils/utils.c ./utils/ft_atoi.c ./utils/ft_isdigit.c\
-			 ./utils/ft_strncmp.c ./utils/ft_strcmp.c ./utils/ft_strchr.c ./utils/ft_strlen.c\
-			 ./utils/ft_strjoin.c ./utils/ft_strdup.c ./utils/ft_putchar_fd.c\
-			 ./utils/ft_putstr_fd.c ./utils/ft_split.c ./utils/ft_substr.c\
-			 ./utils/ft_calloc.c checks/check_map_file.c checks/check_map_file2.c\
-			 ./utils/ft_memset.c utils/free_mlx.c\
-			 ./src/init_data.c\
-			 ./src/init/init_data.c\
-			./src/init/init_mlx.c\
-			./src/init/init_textures.c\
-			./src/movement/input_handler.c\
-			./src/movement/player_dir.c\
-			./src/movement/player_move.c\
-			./src/movement/player_pos.c\
-			./src/movement/player_rotate.c\
-			./src/render/image_utils.c\
-			./src/render/minimap_image.c\
-			./src/render/minimap_render.c\
-			./src/render/raycasting.c\
-			./src/render/render.c\
-			./src/render/texture.c\
-			
-OBJ_DIR = obj
-OBJ = $(addprefix $(OBJ_DIR)/, $(CUB3D_SRC:.c=.o))
+# Mode
+BONUS = 0
 
-all: $(NAME)
-bonus: $(BONUS)
+# Compiler and compilation flags
+CC		= cc
+CFLAGS	= -Werror -Wextra -Wall -g3 -fsanitize=address
 
-$(OBJ_DIR)/%.o: %.c
-	@mkdir -p $(dir $@)
-	$(CC) $(CFLAGS) -c $< -o $@
+# Minilibx
+MLX_PATH	= minilibx-linux/
+MLX_NAME	= libmlx.a
+MLX			= $(MLX_PATH)$(MLX_NAME)
 
-$(NAME): $(OBJ)
-		$(CC) $(CFLAGS) $(OBJ) $(MLX_CMD) -o $(NAME)
-		@echo "✅-------✅IS MAKE✅-------✅"
+# Libft
+LIBFT_PATH	= libft/
+LIBFT_NAME	= libft.a
+LIBFT		= $(LIBFT_PATH)$(LIBFT_NAME)
 
-$(BONUS): $(OBJ)
-		$(CC) $(CFLAGS) $(OBJ) $(MLX_CMD) -o $(BONUS)
-		@echo "✅-------✅BONUS IS MAKE✅-------✅"
+# Sources
+SRC_PATH = ./sources/
+SRC		= 	main.c \
+			error.c \
+			init/init_data.c \
+			init/init_mlx.c \
+			init/init_textures.c \
+			parsing/check_args.c \
+			parsing/parse_data.c \
+			parsing/get_file_data.c \
+			parsing/create_game_map.c \
+			parsing/check_textures.c \
+			parsing/check_map.c \
+			parsing/check_map_borders.c \
+			parsing/fill_color_textures.c \
+			parsing/parsing_utils.c \
+			movement/input_handler.c \
+			movement/player_dir.c \
+			movement/player_pos.c \
+			movement/player_move.c \
+			movement/player_rotate.c \
+			render/raycasting.c \
+			render/render.c \
+			render/texture.c \
+			render/image_utils.c \
+			render/minimap_render.c \
+			render/minimap_image.c \
+			exit/exit.c \
+			exit/free_data.c \
+			debug/debug.c
+SRCS	= $(addprefix $(SRC_PATH), $(SRC))
 
+# Objects
+OBJ_PATH	= ./objects/
+OBJ			= $(SRC:.c=.o)
+OBJS		= $(addprefix $(OBJ_PATH), $(OBJ))
+
+# Includes
+INC			=	-I ./includes/\
+				-I ./libft/\
+				-I ./minilibx-linux/
+
+# Main rule
+all: $(OBJ_PATH) $(MLX) $(LIBFT) $(NAME)
+
+# Objects directory rule
+$(OBJ_PATH):
+	mkdir -p $(OBJ_PATH)
+	mkdir -p $(OBJ_PATH)/init
+	mkdir -p $(OBJ_PATH)/parsing
+	mkdir -p $(OBJ_PATH)/movement
+	mkdir -p $(OBJ_PATH)/render
+	mkdir -p $(OBJ_PATH)/debug
+	mkdir -p $(OBJ_PATH)/exit
+
+# Objects rule
+$(OBJ_PATH)%.o: $(SRC_PATH)%.c
+	$(CC) $(CFLAGS) -DBONUS=$(BONUS) -c $< -o $@ $(INC)
+
+# Project file rule
+$(NAME): $(OBJS)
+	$(CC) $(CFLAGS) -DBONUS=$(BONUS) $(OBJS) -o $@ $(INC) $(LIBFT) $(MLX) -lXext -lX11 -lm
+	@echo "$(GREEN)=========================$(NC)"
+	@echo "$(GREEN)      Cub3D Created      $(NC)"
+	@echo "$(GREEN)=========================$(NC)"
+
+# Libft rule
+$(LIBFT):
+	make --no-print-directory -sC  $(LIBFT_PATH)
+
+# MLX rule
+$(MLX):
+	make -sC $(MLX_PATH)
+
+bonus: fclean
+	make --no-print-directory BONUS=1 all
+
+# Clean up build files rule
 clean:
-	$(RM) $(OBJ_DIR)
-	@echo "🧹--------🧹IS CLEAN🧹--------🧹"
+	rm -rf $(OBJ_PATH)
+	@echo "$(RED)=========================$(NC)"
+	@echo "$(RED)      Objects removed    $(NC)"
+	@echo "$(RED)=========================$(NC)"
 
+# Remove program executable
 fclean: clean
-	$(RM) $(NAME)
-	@echo "🧹-----🧹IS FULL CLEAN🧹-----🧹"
+	rm -f $(NAME)
+	@echo "$(RED)=========================$(NC)"
+	@echo "$(RED)      Cub3D removed      $(NC)"
+	@echo "$(RED)=========================$(NC)"
 
+# Clean + remove executable
 re: fclean all
 
 .SILENT:
