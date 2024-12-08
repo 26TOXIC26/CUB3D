@@ -6,7 +6,7 @@
 /*   By: ebouboul <ebouboul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 13:41:59 by amousaid          #+#    #+#             */
-/*   Updated: 2024/12/07 17:34:00 by ebouboul         ###   ########.fr       */
+/*   Updated: 2024/12/08 12:27:08 by ebouboul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static bool	is_valid_pos(t_data *data, double x, double y)
 {
 	// if (!BONUS && is_valid_pos_in_map(data, x, y))
 	// 	return (true);
-	if (BONUS && is_valid_pos_wall_collision(data, x, y))
+	if (is_valid_pos_wall_collision(data, x, y))
 		return (true);
 	return (false);
 }
