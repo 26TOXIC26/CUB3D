@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ebouboul <ebouboul@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 13:43:46 by amousaid          #+#    #+#             */
-/*   Updated: 2024/12/07 13:43:48 by amousaid         ###   ########.fr       */
+/*   Updated: 2024/12/11 18:25:19 by ebouboul         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,5 @@ int	render(t_data *data)
 	if (data->player.has_moved == 0)
 		return (0);
 	render_images(data);
-	print_all(data);
 	return (0);
 }
