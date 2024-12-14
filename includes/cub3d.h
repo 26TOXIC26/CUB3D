@@ -6,7 +6,7 @@
 /*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 09:13:42 by amousaid          #+#    #+#             */
-/*   Updated: 2024/12/07 09:13:45 by amousaid         ###   ########.fr       */
+/*   Updated: 2024/12/12 23:54:54 by amousaid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@
 # define MMAP_COLOR_PLAYER 0x00FF00
 # define MMAP_COLOR_WALL 0x808080
 # define MMAP_COLOR_FLOOR 0xE6E6E6
-# define MMAP_COLOR_SPACE 0x404040
+# define MMAP_COLOR_SPACE 0x000000
 
 // ERROR MESSAGES
 # define ERR_USAGE "usage: ./cub3d <path/to/map.cub>"
@@ -88,6 +88,7 @@
 # define ERR_MAP_NO_WALLS "Map is not surrounded by walls"
 # define ERR_MAP_LAST "Map is not the last element in file"
 # define ERR_PLAYER_POS "Invalid player position"
+# define ERR_SPACE_IN_MAP "Map has spaces in it"
 # define ERR_PLAYER_DIR "Map has no player position (expected N, S, E or W)"
 # define ERR_MALLOC "Could not allocate memory"
 # define ERR_MLX_START "Could not start mlx"
@@ -268,6 +269,8 @@ int						check_map_sides(t_mapinfo *map, char **map_tab);
 /* parsing/parsing_utils.c */
 int						is_a_white_space(char c);
 size_t					find_biggest_len(t_mapinfo *map, int i);
+int						is_nsew(char c);
+int						check_around_zero(char **map_tab);
 
 /* render/render.c */
 int						render(t_data *data);

@@ -6,7 +6,7 @@
 /*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 13:42:35 by amousaid          #+#    #+#             */
-/*   Updated: 2024/12/07 13:42:37 by amousaid         ###   ########.fr       */
+/*   Updated: 2024/12/12 22:11:10 by amousaid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static int	check_top_or_bottom(char **map_tab, int i, int j)
 		j++;
 	while (map_tab[i][j])
 	{
-		if (map_tab[i][j] != '1')
+		if (map_tab[i][j] != '1' && map_tab[i][j] != ' ')
 			return (FAILURE);
 		j++;
 	}
@@ -40,7 +40,7 @@ int	check_map_sides(t_mapinfo *map, char **map_tab)
 	while (i < (map->height - 1))
 	{
 		j = ft_strlen(map_tab[i]) - 1;
-		if (map_tab[i][j] != '1')
+		if (map_tab[i][j] != '1' && map_tab[i][j] != ' ')
 			return (FAILURE);
 		i++;
 	}

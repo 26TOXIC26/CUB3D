@@ -6,7 +6,7 @@
 /*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 13:43:36 by amousaid          #+#    #+#             */
-/*   Updated: 2024/12/07 13:43:38 by amousaid         ###   ########.fr       */
+/*   Updated: 2024/12/12 23:59:07 by amousaid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ static char	*add_minimap_line(t_data *d, t_minimap *m, int y)
 	line = ft_calloc(m->size + 1, sizeof * line);
 	if (!line)
 		return (NULL);
-	x = 0;
-	while (x < m->size && x < d->mapinfo.width)
+	x = -1;
+	while (++x < m->size && x < d->mapinfo.width)
 	{
 		if (!is_valid_map_coord(y + m->offset_y, d->mapinfo.height)
 			|| !is_valid_map_coord(x + m->offset_x, d->mapinfo.width))
@@ -49,9 +49,10 @@ static char	*add_minimap_line(t_data *d, t_minimap *m, int y)
 			line[x] = '1';
 		else if (d->map[y + m->offset_y][x + m->offset_x] == '0')
 			line[x] = '0';
+		else if (d->map[y + m->offset_y][x + m->offset_x] == ' ')
+			line[x] = ' ';
 		else
 			line[x] = '\0';
-		x++;
 	}
 	return (line);
 }

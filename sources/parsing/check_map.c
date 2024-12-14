@@ -6,7 +6,7 @@
 /*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 13:42:44 by amousaid          #+#    #+#             */
-/*   Updated: 2024/12/07 13:42:46 by amousaid         ###   ########.fr       */
+/*   Updated: 2024/12/12 23:56:03 by amousaid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,15 +24,13 @@ static int	check_map_elements(t_data *data, char **map_tab)
 		j = 0;
 		while (map_tab[i][j])
 		{
-			while (data->map[i][j] == ' ' || data->map[i][j] == '\t'
-				|| data->map[i][j] == '\r' || data->map[i][j] == '\v'
-				|| data->map[i][j] == '\f')
+			while (is_a_white_space(map_tab[i][j]) == SUCCESS)
 				j++;
 			if (!(ft_strchr("10NSEW", map_tab[i][j])))
 				return (err_msg(data->mapinfo.path, ERR_INV_LETTER, FAILURE));
-			if (ft_strchr("NSEW", map_tab[i][j]) && data->player.dir != '0')
+			if (is_nsew(map_tab[i][j]) && data->player.dir != '0')
 				return (err_msg(data->mapinfo.path, ERR_NUM_PLAYER, FAILURE));
-			if (ft_strchr("NSEW", map_tab[i][j]) && data->player.dir == '0')
+			if (is_nsew(map_tab[i][j]) && data->player.dir == '0')
 				data->player.dir = map_tab[i][j];
 			j++;
 		}
@@ -48,22 +46,18 @@ static int	check_position_is_valid(t_data *data, char **map_tab)
 
 	i = (int)data->player.pos_y;
 	j = (int)data->player.pos_x;
-	if (ft_strlen(map_tab[i - 1]) < (size_t)j
-		|| ft_strlen(map_tab[i + 1]) < (size_t)j
-		|| is_a_white_space(map_tab[i][j - 1]) == SUCCESS
-		|| is_a_white_space(map_tab[i][j + 1]) == SUCCESS
+	if (ft_strlen(map_tab[i - 1]) < (size_t)j + 1 || ft_strlen(map_tab[i
+				+ 1]) < (size_t)j + 1 || is_a_white_space(map_tab[i][j
+			- 1]) == SUCCESS || is_a_white_space(map_tab[i][j + 1]) == SUCCESS
 		|| is_a_white_space(map_tab[i - 1][j]) == SUCCESS
 		|| is_a_white_space(map_tab[i + 1][j]) == SUCCESS)
 		return (FAILURE);
-	change_space_into_wall(data);
 	return (SUCCESS);
 }
 
 static int	check_player_position(t_data *data, char **map_tab)
 {
-	int	i;
-	int	j;
-
+	int (i), (j);
 	if (data->player.dir == '0')
 		return (err_msg(data->mapinfo.path, ERR_PLAYER_DIR, FAILURE));
 	i = 0;
@@ -84,6 +78,8 @@ static int	check_player_position(t_data *data, char **map_tab)
 	}
 	if (check_position_is_valid(data, map_tab) == FAILURE)
 		return (err_msg(data->mapinfo.path, ERR_PLAYER_POS, FAILURE));
+	if (check_around_zero(map_tab) == FAILURE)
+		return (err_msg(data->mapinfo.path, ERR_SPACE_IN_MAP, FAILURE));
 	return (SUCCESS);
 }
 

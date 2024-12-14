@@ -6,7 +6,7 @@
 /*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 09:05:42 by amousaid          #+#    #+#             */
-/*   Updated: 2024/12/07 09:05:45 by amousaid         ###   ########.fr       */
+/*   Updated: 2024/12/12 18:09:40 by amousaid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,15 +34,17 @@ int	ft_atoi(const char *str)
 		i++;
 	if (str[i] == '+')
 		i++;
-	else if (str[i] == '-')
-	{
-		isneg *= -1;
-		i++;
-	}
 	while (ft_isdigit(str[i]))
 	{
 		num = (num * 10) + (str[i] - '0');
+		if (num > 999)
+			return (-1);
 		i++;
 	}
+	while (str[i] && (str[i] == ' ' || str[i] == '\t' || str[i] == '\n'
+			|| str[i] == '\r' || str[i] == '\v' || str[i] == '\f'))
+		i++;
+	if (str[i])
+		return (-1);
 	return (num * isneg);
 }
